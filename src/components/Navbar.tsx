@@ -1,0 +1,101 @@
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "History", href: "#history" },
+  { label: "Geography", href: "#geography" },
+  { label: "Families", href: "#families" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Contact", href: "#contact" },
+  //{ label: "Register", href: "#register" },
+];
+
+export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-card/95 backdrop-blur-md shadow-soft py-3"
+          : "bg-transparent py-5"
+      )}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <a href="#home" className="flex items-center gap-2">
+          <span
+            className={cn(
+              "font-amiri text-2xl font-bold transition-colors duration-300",
+              isScrolled ? "text-primary" : "text-cream"
+            )}
+          >
+            كفرحورا
+          </span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-1">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200",
+                isScrolled
+                  ? "text-foreground hover:bg-primary/10 hover:text-primary"
+                  : "text-cream/90 hover:bg-cream/10 hover:text-cream"
+              )}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className={cn(
+            "lg:hidden",
+            isScrolled ? "text-foreground" : "text-cream"
+          )}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </Button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-card/98 backdrop-blur-md border-t border-border animate-fade-in">
+          <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 rounded-lg text-foreground hover:bg-primary/10 hover:text-primary transition-colors font-medium"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}
