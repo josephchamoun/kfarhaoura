@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "History", href: "#history" },
-  { label: "Geography", href: "#geography" },
-  { label: "Families", href: "#families" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
-  //{ label: "Register", href: "#register" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "History", href: "/history" },
+  { label: "Geography", href: "/geography" },
+  { label: "Families", href: "/families" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -26,6 +27,11 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (href: string) => {
+    navigate(href);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={cn(
@@ -36,7 +42,10 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 bg-none border-none cursor-pointer"
+        >
           <span
             className={cn(
               "font-amiri text-2xl font-bold transition-colors duration-300",
@@ -45,23 +54,23 @@ export function Navbar() {
           >
             كفرحورا
           </span>
-        </a>
+        </button>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
-            <a
+            <button
               key={item.href}
-              href={item.href}
+              onClick={() => handleNavClick(item.href)}
               className={cn(
-                "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200",
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 bg-none border-none cursor-pointer",
                 isScrolled
                   ? "text-foreground hover:bg-primary/10 hover:text-primary"
                   : "text-cream/90 hover:bg-cream/10 hover:text-cream"
               )}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </div>
 
@@ -84,14 +93,13 @@ export function Navbar() {
         <div className="lg:hidden bg-card/98 backdrop-blur-md border-t border-border animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 rounded-lg text-foreground hover:bg-primary/10 hover:text-primary transition-colors font-medium"
+                onClick={() => handleNavClick(item.href)}
+                className="px-4 py-3 rounded-lg text-foreground hover:bg-primary/10 hover:text-primary transition-colors font-medium text-left bg-none border-none cursor-pointer w-full"
               >
                 {item.label}
-              </a>
+              </button>
             ))}
           </div>
         </div>
