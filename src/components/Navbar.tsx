@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "History", href: "/history" },
-  { label: "Geography", href: "/geography" },
-  { label: "Families", href: "/families" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#" },
+  { label: "About", href: "#about" },
+  { label: "History", href: "#history" },
+  { label: "Geography", href: "#geography" },
+  { label: "Families", href: "#families" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
-  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -28,7 +26,16 @@ export function Navbar() {
   }, []);
 
   const handleNavClick = (href: string) => {
-    navigate(href);
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
     setIsMobileMenuOpen(false);
   };
 
@@ -42,8 +49,9 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* LOGO */}
         <button
-          onClick={() => navigate("/")}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-2 bg-none border-none cursor-pointer"
         >
           <span
@@ -56,7 +64,7 @@ export function Navbar() {
           </span>
         </button>
 
-        {/* Desktop Navigation */}
+        {/* DESKTOP NAV */}
         <div className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
             <button
@@ -74,7 +82,7 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* MOBILE MENU TOGGLE */}
         <Button
           variant="ghost"
           size="icon"
@@ -88,7 +96,7 @@ export function Navbar() {
         </Button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE NAV MENU */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-card/98 backdrop-blur-md border-t border-border animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
