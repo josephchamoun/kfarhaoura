@@ -1,8 +1,24 @@
 import { ChevronDown, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-kfarhaoura.jpg";
+import { useState } from "react";
 
 export function HeroSection() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const handleNavClick = (href: string) => {
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    setIsMobileMenuOpen(false);
+  };
   return (
     <section
       id="home"
@@ -47,24 +63,21 @@ export function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" asChild>
-              <a href="#about">Explore the Town</a>
+            <Button
+              id="explore-town"
+              variant="hero"
+              size="xl"
+              onClick={() => handleNavClick("#about")}
+            >
+              Explore the Town
             </Button>
+
             {/*
             <Button variant="heroOutline" size="xl" asChild>
               <a href="#register">Join Community</a>
             </Button>*/}
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <a
-          href="#about"
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/60 hover:text-cream transition-colors"
-        >
-          <span className="text-sm font-medium">Scroll to discover</span>
-          <ChevronDown size={24} className="animate-bounce" />
-        </a>
       </div>
     </section>
   );
