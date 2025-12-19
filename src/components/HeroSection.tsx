@@ -1,6 +1,7 @@
 import { ChevronDown, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-kfarhaoura.jpg";
+import church from "@/assets/church.jpg";
 import { useState } from "react";
 
 export function HeroSection() {
@@ -27,7 +28,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${church})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-stone-dark/70 via-stone-dark/50 to-stone-dark/80" />
       </div>
