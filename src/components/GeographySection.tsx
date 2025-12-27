@@ -1,5 +1,5 @@
-import landscapeImage from "@/assets/landscape-kfarhaoura.jpg";
-import mountainsImage from "@/assets/mountains-view.jpg";
+import olivetrees from "@/assets/olivetrees.jpg";
+import mountainsImage from "@/assets/landscape.jpg";
 
 const geographyFacts = [
   {
@@ -41,7 +41,7 @@ export function GeographySection() {
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <div className="rounded-2xl overflow-hidden shadow-elevated">
             <img
-              src={landscapeImage}
+              src={olivetrees}
               alt="مناظر طبيعية من كفرحورا"
               className="w-full h-64 md:h-80 object-cover hover:scale-105 transition-transform duration-500"
             />

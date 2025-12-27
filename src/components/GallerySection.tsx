@@ -1,21 +1,41 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import heroImage from "@/assets/hero-kfarhaoura.jpg";
-import churchImage from "@/assets/church-kfarhaoura.jpg";
-import landscapeImage from "@/assets/landscape-kfarhaoura.jpg";
-import villageSquare from "@/assets/village-square.jpg";
-import mountainsView from "@/assets/mountains-view.jpg";
+import heroImage from "@/assets/whole-town.jpg";
+import churchImage from "@/assets/churchview.jpg";
+import house from "@/assets/house.jpg";
+import marelias from "@/assets/marelias.jpg";
+import pinetrees from "@/assets/pinetrees.jpg";
+import townhall from "@/assets/townhall.jpg";
+import waterfall from "@/assets/nafoora.jpg";
+import landscape from "@/assets/landscape.jpg";
 
 const galleryImages = [
-  { src: heroImage, title: "إطلالة بانورامية", english: "Panoramic View" },
+  { src: heroImage, title: "إطلالة البلدة ", english: " Town View" },
   { src: churchImage, title: "الكنيسة التاريخية", english: "Historic Church" },
-  { src: landscapeImage, title: "المدرجات الزراعية", english: "Agricultural Terraces" },
-  { src: villageSquare, title: "ساحة القرية", english: "Village Square" },
-  { src: mountainsView, title: "إطلالة الجبال", english: "Mountain Views" },
+  {
+    src: house,
+    title: "منزل تقليدي ",
+    english: "Historic House",
+  },
+  {
+    src: marelias,
+    title: "مار سركيس و باخوس",
+    english: "Saint Sarkis and Bakhos",
+  },
+  {
+    src: pinetrees,
+    title: "أشجار الصنوبر",
+    english: "Pine Trees",
+  },
+  { src: townhall, title: "قاعة الرعية", english: "Town Hall" },
+  { src: waterfall, title: " نبع المياه", english: "Water Spring" },
+  { src: landscape, title: "منظر طبيعي", english: "Landscape View" },
 ];
 
 export function GallerySection() {
-  const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<
+    (typeof galleryImages)[0] | null
+  >(null);
 
   return (
     <section id="gallery" className="py-20 bg-card">
@@ -35,7 +55,7 @@ export function GallerySection() {
             <button
               key={index}
               onClick={() => setSelectedImage(image)}
-              className="group relative aspect-[4/3] rounded-xl overflow-hidden shadow-soft card-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="group relative aspect-[8/9] rounded-xl overflow-hidden shadow-soft card-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <img
                 src={image.src}
@@ -63,14 +83,19 @@ export function GallerySection() {
             >
               <X size={24} />
             </button>
-            <div className="max-w-5xl max-h-[85vh] relative" onClick={(e) => e.stopPropagation()}>
+            <div
+              className="max-w-5xl max-h-[85vh] relative"
+              onClick={(e) => e.stopPropagation()}
+            >
               <img
                 src={selectedImage.src}
                 alt={selectedImage.title}
                 className="max-w-full max-h-[85vh] object-contain rounded-lg"
               />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-stone-dark/90 to-transparent rounded-b-lg">
-                <h3 className="font-amiri text-xl text-cream">{selectedImage.title}</h3>
+                <h3 className="font-amiri text-xl text-cream">
+                  {selectedImage.title}
+                </h3>
                 <p className="text-cream/70">{selectedImage.english}</p>
               </div>
             </div>

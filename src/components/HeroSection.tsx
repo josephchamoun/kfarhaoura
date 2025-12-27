@@ -1,7 +1,7 @@
 import { ChevronDown, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-kfarhaoura.jpg";
-import church from "@/assets/church.jpg";
+import church from "@/assets/whole-town.jpg";
 import { useState } from "react";
 
 export function HeroSection() {

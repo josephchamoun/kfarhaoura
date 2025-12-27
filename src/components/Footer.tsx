@@ -3,6 +3,18 @@ import { Heart } from "lucide-react";
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const handleFooterClick = (href: string) => {
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   return (
     <footer className="bg-stone-dark py-12">
       <div className="container mx-auto px-4">
@@ -14,39 +26,42 @@ export function Footer() {
 
         {/* Quick Links */}
         <div className="flex flex-wrap justify-center gap-6 mb-8">
-          <a
-            href="#home"
+          <button
+            onClick={() => handleFooterClick("#")}
             className="text-cream/70 hover:text-cream transition-colors text-sm"
           >
             Home
-          </a>
-          <a
-            href="#about"
+          </button>
+          <button
+            onClick={() => handleFooterClick("#about")}
             className="text-cream/70 hover:text-cream transition-colors text-sm"
           >
             About
-          </a>
-          <a
-            href="#history"
+          </button>
+          <button
+            onClick={() => handleFooterClick("#history")}
             className="text-cream/70 hover:text-cream transition-colors text-sm"
           >
             History
-          </a>
-          <a
-            href="#families"
+          </button>
+          <button
+            onClick={() => handleFooterClick("#families")}
             className="text-cream/70 hover:text-cream transition-colors text-sm"
           >
             Families
-          </a>
-          <a
-            href="#gallery"
+          </button>
+          <button
+            onClick={() => handleFooterClick("#gallery")}
             className="text-cream/70 hover:text-cream transition-colors text-sm"
           >
             Gallery
-          </a>
-          {/*<a href="#register" className="text-cream/70 hover:text-cream transition-colors text-sm">
-            Register
-          </a>*/}
+          </button>
+          <button
+            onClick={() => handleFooterClick("#contact")}
+            className="text-cream/70 hover:text-cream transition-colors text-sm"
+          >
+            Contact
+          </button>
         </div>
 
         {/* Divider */}

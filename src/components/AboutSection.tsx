@@ -1,5 +1,5 @@
 import { Mountain, Ruler, MapPin, TreeDeciduous } from "lucide-react";
-import churchImage from "@/assets/church-kfarhaoura.jpg";
+import churchImage from "@/assets/church.jpg";
 
 const stats = [
   {
